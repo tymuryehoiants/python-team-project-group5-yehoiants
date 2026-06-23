@@ -14,10 +14,10 @@ def get_user_input() -> tuple[float, str, str]:
         return 0.0, "", ""
 
     from_currency = (
-        input("Enter source currency (USD, EUR, RUB): ").strip().upper()
+        input("Enter source currency (USD, EUR, UAH): ").strip().upper()
     )
     to_currency = (
-        input("Enter target currency (USD, EUR, RUB): ").strip().upper()
+        input("Enter target currency (USD, EUR, UAH): ").strip().upper()
     )
 
     return amount, from_currency, to_currency
