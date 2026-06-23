@@ -1,3 +1,4 @@
+import os
 
 
 from datetime import datetime
@@ -20,18 +21,18 @@ def convert_currency(amount: float, from_curr: str, to_curr: str) -> float:
     return converted_amount
 
 
-def log_transaction(
-    amount: float, from_curr: str, result: float, to_curr: str
-) -> None:
-    
+def log_transaction(amount: float, from_curr: str, result: float, to_curr: str) -> None:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_message = (
-        f"[{timestamp}] Exchanged: {amount} {from_curr} -> "
-        f"{result:.2f} {to_curr}\n"
-    )
-
-    try:
-        with open("data/log.txt", "a", encoding="utf-8") as f:
-            f.write(log_message)
-    except FileNotFoundError:
-        print("Error: Log directory or file not found!")
+    log_message = f"[{timestamp}] Exchanged: {amount} {from_curr} -> {result:.2f} {to_curr}\n"
+    
+   
+    current_dir = os.path.dirname(os.path.abspath(__file__)) 
+    project_root = os.path.dirname(current_dir) 
+    
+    data_dir = os.path.join(project_root, "data")
+    os.makedirs(data_dir, exist_ok=True)
+    
+    log_path = os.path.join(data_dir, "log.txt")
+    
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(log_message)
